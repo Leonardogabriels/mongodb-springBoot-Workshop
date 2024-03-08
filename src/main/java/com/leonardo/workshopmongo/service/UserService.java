@@ -22,4 +22,9 @@ public class UserService {
         Optional<User> obj = userRepository.findById(id);
         return obj.orElseThrow(() -> new NotFoundException(id));
     }
+
+    public User insert(User obj){
+        User objSave = userRepository.insert(obj);
+        return  objSave;
+    }
 }
