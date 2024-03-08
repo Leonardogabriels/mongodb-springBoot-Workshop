@@ -4,6 +4,7 @@ import com.leonardo.workshopmongo.entity.User;
 import com.leonardo.workshopmongo.repository.UserRepository;
 import com.leonardo.workshopmongo.service.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +27,14 @@ public class UserService {
     public User insert(User obj){
         User objSave = userRepository.insert(obj);
         return  objSave;
+    }
+
+    public void delete(String id){
+        findById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e ){
+            throw new NotFoundException(id);
+        }
     }
 }
