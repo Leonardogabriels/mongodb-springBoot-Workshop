@@ -1,5 +1,6 @@
 package com.leonardo.workshopmongo.config;
 
+import com.leonardo.workshopmongo.dto.AuthorDto;
 import com.leonardo.workshopmongo.entity.Post;
 import com.leonardo.workshopmongo.entity.User;
 import com.leonardo.workshopmongo.repository.PostRepository;
@@ -33,9 +34,9 @@ public class instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null,sdf.parse("21/03/2018"),"partiu viagem","vou viajar pra SP",maria);
-
         repository.saveAll(Arrays.asList(maria,alex,bob));
+
+        Post post1 = new Post(null,sdf.parse("21/03/2018"),"partiu viagem","vou viajar pra SP",new AuthorDto(maria));
         postRepositorys.saveAll(Arrays.asList(post1));
     }
 }
