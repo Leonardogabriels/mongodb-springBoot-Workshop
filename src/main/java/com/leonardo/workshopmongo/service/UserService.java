@@ -37,4 +37,15 @@ public class UserService {
             throw new NotFoundException(id);
         }
     }
+
+    public User update(User obj){
+        User newObj = findById(obj.getId());
+        updata(newObj, obj);
+        return userRepository.save(newObj);
+    }
+
+    private void  updata(User newObj,User obj ){
+        newObj.setEmail(obj.getEmail());
+        newObj.setName(obj.getName());
+    }
 }
