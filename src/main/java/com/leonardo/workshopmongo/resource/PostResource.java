@@ -1,6 +1,7 @@
 package com.leonardo.workshopmongo.resource;
 
 import com.leonardo.workshopmongo.entity.Post;
+import com.leonardo.workshopmongo.resource.util.URL;
 import com.leonardo.workshopmongo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +39,11 @@ public class PostResource {
     public ResponseEntity<Void> delete(@PathVariable String id) {
         postService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping(value = "/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
+         text = URL.decodeParam(text);
+         List<Post> list = postService.findByTitle(text);
+        return ResponseEntity.ok().body(list);
     }
 }
